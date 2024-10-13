@@ -3,33 +3,27 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+import Form from './components/Form'
+import Display from "./components/Display.jsx";
+
+// Creates shared context for the app allowing shared storage between components
+export const Profile = createContext();
+
 function App() {
-  const [count, setCount] = useState(0)
+    // Keep track of user's information
+    const [profile, setProfile] = useState({name: "", email: "", bio: ""});
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      // Shares profile data with Display and Form components
+      <ProfileContext.Provider value = {{profile, setProfile}}>
+          <div>
+              <h1>User Profile Manager</h1>
+              <Form />
+              <br></br>
+              <Display />
+          </div>
+      </ProfileContext.Provider>
+  );
 }
 
-export default App
+export default App;
