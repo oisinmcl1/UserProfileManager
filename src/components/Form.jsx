@@ -11,6 +11,16 @@ function Form() {
 
     // Func called when user submits form
     const handleSubmit = () => {
+        // Stop refresh of page when form is submitted because it just starts fresh page without info
+        event.preventDefault();
+
+        console.log(
+            "Saving profile\n" +
+            "\nName: " + input.name +
+            "\nEmail: " + input.email +
+            "\nBio: " + input.bio
+        );
+
         // Save user's input to profile
         setProfile(input);
     }
